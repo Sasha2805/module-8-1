@@ -16,7 +16,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Scanner;
 
-public class FibonacciFx extends Application {
+public class TextEditor extends Application {
     private static final int WIDTH = 600;
     private static final int HEIGHT = 600;
     private static final String FILE_PATH = "E:\\GoJava\\document.txt";
@@ -41,45 +41,49 @@ public class FibonacciFx extends Application {
         textArea.setTranslateX(10);
         textArea.setTranslateY(inputPath.getTranslateY() + inputPath.getMinHeight() + 10);
 
-        Button loadFile = ComponentsFx.createButton("Load", 100, () ->
-            new Thread(() -> {
-                try {
-                    URL website = new URL(inputPath.getText());
-                    ReadableByteChannel channel = Channels.newChannel(website.openStream());
-                    FileOutputStream stream = new FileOutputStream(FILE_PATH);
-                    stream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
-                    System.out.println("Загрузка завершилась успешно");
-                    String file = new Scanner(new File(FILE_PATH)).useDelimiter("\\Z").next();
-                    textArea.setText(file);
-                } catch (Exception e){
-                    e.printStackTrace();
-                    System.out.println("Загрузка завершилась с ошибкой...");
-                }
-                }).start());
-        loadFile.setTranslateX(inputPath.getTranslateX() + inputPath.getMinWidth() + 10);
-        loadFile.setTranslateY(10);
-
-        Button save = ComponentsFx.createButton("Save", 100, () ->
+        Button loadFile = new Button("Load");
+        loadFile.setOnAction(event -> {
                 new Thread(() -> {
                     try {
-                        File file = new File(FILE_PATH);
-                        FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
-                        fileWriter.write(textArea.getText());
-                        fileWriter.flush();
-                        fileWriter.close();
-                    } catch (IOException e) {
+                        URL website = new URL(inputPath.getText());
+                        ReadableByteChannel channel = Channels.newChannel(website.openStream());
+                        FileOutputStream stream = new FileOutputStream(FILE_PATH);
+                        stream.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
+                        System.out.println("Загрузка завершилась успешно");
+                        String file = new Scanner(new File(FILE_PATH)).useDelimiter("\\Z").next();
+                        textArea.setText(file);
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        System.out.println("Загрузка завершилась с ошибкой...");
                     }
-                }).start());
-        save.setTranslateX(10);
+                }).start();
+        });
+        loadFile.setTranslateX(inputPath.getTranslateX() + inputPath.getMinWidth() + 10);
+        loadFile.setTranslateY(10);
+        loadFile.setMaxWidth(100);
+
+        Button save = new Button("Save");
+        save.setOnAction(event -> {
+            new Thread(() -> {
+                try {
+                    File file = new File(FILE_PATH);
+                    FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
+                    fileWriter.write(textArea.getText());
+                    fileWriter.flush();
+                    fileWriter.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        });
         save.setTranslateY(inputPath.getMaxHeight() + textArea.getMinHeight() + 50);
+        save.setTranslateX(10);
+        save.setMaxWidth(100);
 
         root.getChildren().addAll(inputPath, loadFile, textArea, save);
         primaryStage.setScene(new Scene(root));
         primaryStage.setHeight(HEIGHT);
         primaryStage.setWidth(WIDTH);
         primaryStage.show();
-        
     }
-
 }
