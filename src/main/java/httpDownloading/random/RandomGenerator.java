@@ -1,4 +1,4 @@
-package random;
+package httpDownloading.random;
 
 import java.util.Iterator;
 import java.util.Random;

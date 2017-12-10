@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-public class LoadImageURL {
+public class LoadingURLs {
     public static Set<String> load(String path) throws FileNotFoundException {
         String json = new Scanner(new File(path)).useDelimiter("\\Z").next();
         Set<String> statuses = new HashSet<>();
