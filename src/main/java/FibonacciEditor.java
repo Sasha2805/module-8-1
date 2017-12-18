@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,7 +18,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 
-public class Fibonacci extends Application {
+public class FibonacciEditor extends Application {
     private static final String FILE_NAME = "fibonacci.txt";
     private static final int WIDTH = 400;
     private static final int HEIGHT = 400;
@@ -54,7 +53,7 @@ public class Fibonacci extends Application {
         exceptionStage.setScene(new Scene(exceptionWindow, 200, 100));
 
         // Подсчет последовательности
-        Button fib = new Button("Fibonacci");
+        Button fib = new Button("FibonacciEditor");
         final String[] resultFib = new String[1];
         final Thread[] count = new Thread[1];
         fib.setOnAction(event -> {
@@ -79,7 +78,7 @@ public class Fibonacci extends Application {
         inputPath.setMaxWidth(200);
 
         // Сохраняем в файл
-        Button saveFib = new Button("Save Fibonacci");
+        Button saveFib = new Button("Save FibonacciEditor");
         saveFib.setOnAction(event -> {
             new Thread(() -> {
                 try {
@@ -118,7 +117,7 @@ public class Fibonacci extends Application {
         root.setVgap(10);
         root.setHgap(10);
 
-        primaryStage.setTitle("Fibonacci Editor");
+        primaryStage.setTitle("FibonacciEditor Editor");
         primaryStage.setScene(new Scene(root));
         primaryStage.setHeight(HEIGHT);
         primaryStage.setWidth(WIDTH);
