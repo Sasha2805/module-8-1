@@ -53,7 +53,7 @@ public class FibonacciEditor extends Application {
         exceptionStage.setScene(new Scene(exceptionWindow, 200, 100));
 
         // Подсчет последовательности
-        Button fib = new Button("FibonacciEditor");
+        Button fib = new Button("Fibonacci");
         final String[] resultFib = new String[1];
         final Thread[] count = new Thread[1];
         fib.setOnAction(event -> {
@@ -78,7 +78,7 @@ public class FibonacciEditor extends Application {
         inputPath.setMaxWidth(200);
 
         // Сохраняем в файл
-        Button saveFib = new Button("Save FibonacciEditor");
+        Button saveFib = new Button("Save Fibonacci");
         saveFib.setOnAction(event -> {
             new Thread(() -> {
                 try {
